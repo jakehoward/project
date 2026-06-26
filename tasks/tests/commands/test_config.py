@@ -3,7 +3,8 @@ from pathlib import Path
 
 import pytest
 
-from tasks.config import CONFIG_FILENAME, Config, read_config, write_config
+from tasks.commands.init import init
+from tasks.config import CONFIG_FILENAME, Config, assert_initialised, read_config, write_config
 
 
 def test_write_config(tmp_path: Path, monkeypatch) -> None:
@@ -76,3 +77,15 @@ def test_read_throws_if_tasks_dir_contains_double_quote(tmp_path: Path, monkeypa
         ValueError, match="Invalid Config: 'tasks_dir' path cannot contain double quote"
     ):
         read_config()
+
+
+def test_assert_initialised_raises_if_not_init(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    with pytest.raises(RuntimeError, match="tasks not initialised, run: tasks --help"):
+        assert_initialised()
+
+
+def test_assert_initialised_not_raises_if_init(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    init(tasks_dir=Path("tasks"))
+    assert_initialised()  ## does not raise

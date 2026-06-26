@@ -18,6 +18,19 @@ def test_init_command_tasks_dir_flag():
     assert args.tasks_dir == "the/tasks/dir"
 
 
+def test_add_command():
+    parser = make_parser()
+    args = parser.parse_args(["add", "--name", "A task to be done"])
+    assert args.command == "add"
+    assert args.name == "A task to be done"
+
+
+def test_add_command_raises_if_name_missing():
+    parser = make_parser()
+    with pytest.raises(SystemExit):
+        parser.parse_args(["add"])
+
+
 def test_version_flag(capsys):
     parser = make_parser()
     with pytest.raises(SystemExit) as exec_info:

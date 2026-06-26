@@ -41,3 +41,8 @@ def write_config(config: Config) -> None:
     _assert_tasks_dir_path_is_valid(config.tasks_dir)
     with open(CONFIG_FILENAME, "w") as f:
         f.write(f'tasks_dir = "{config.tasks_dir}"\n')
+
+
+def assert_initialised() -> None:
+    if not Path(CONFIG_FILENAME).exists():
+        raise RuntimeError("tasks not initialised, run: tasks --help")

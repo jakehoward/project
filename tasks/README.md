@@ -7,26 +7,25 @@ Each task is a Markdown file which tracks its state and history in a footer. No 
 ## Usage
 
 Install
+
 ```
 git clone https://github.com/jakehoward/project
 cd project/tasks
-
-```
-
-## Running
-
-Install dependencies and run the application:
-
-```bash
 uv sync --frozen
 uv run tasks
 uv pip install -e .
 ```
 
-Equivalently, as a module:
+### Initialise
 
 ```bash
-uv run python -m tasks
+tasks init
+```
+
+Optionally choosing where to store tasks (must be inside current working directory)
+
+```bash
+tasks init --tasks-dir path/to/tasks 
 ```
 
 ## Development

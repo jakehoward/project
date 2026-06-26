@@ -50,7 +50,7 @@ testpaths = ["tests"]
 addopts = "-ra -q --import-mode=importlib"
 
 [tool.coverage.run]
-source = ["tasks"]
+source_pkgs = ["tasks"]
 omit = [
     "*/__init__.py",
     "*/__main__.py",

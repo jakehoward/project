@@ -3,12 +3,27 @@ from importlib.metadata import version
 
 
 def make_parser() -> argparse.ArgumentParser:
-    parser = argparse.ArgumentParser()
+    parser = argparse.ArgumentParser(
+        description="A filesystem-based task tracker for small projects.",
+        epilog="Run 'tasks <command> --help' for more info on a specific command.",
+    )
     parser.add_argument("--version", action="version", version=version("tasks"))
 
-    subparsers = parser.add_subparsers(dest="command")
+    subparsers = parser.add_subparsers(dest="command", title="commands")
 
-    init_parser = subparsers.add_parser("init")
-    init_parser.add_argument("--tasks-dir", required=False, default="./tasks")
+    init_parser = subparsers.add_parser("init", help="initialise a new tasks project")
+    init_parser.add_argument(
+        "--tasks-dir",
+        required=False,
+        default="tasks",
+        help=(
+            "Path to where tasks will be stored. "
+            "Must be inside current working directory. "
+            'Defaults to "tasks"'
+        ),
+    )
+
+    add_parser = subparsers.add_parser("add", help="add a new task")
+    add_parser.add_argument("--name", required=True)
 
     return parser
