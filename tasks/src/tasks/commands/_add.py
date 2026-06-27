@@ -1,5 +1,5 @@
+from tasks.actions import create_task
 from tasks.config import assert_initialised, read_config
-from tasks.task import create_task
 
 
 def add_task(name: str) -> None:

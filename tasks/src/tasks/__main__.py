@@ -1,8 +1,7 @@
 from pathlib import Path
 
 from tasks.arg_parser import make_parser
-from tasks.commands.add import add_task
-from tasks.commands.init import init
+from tasks.commands import add_task, init
 
 
 def main() -> None:

@@ -2,7 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from tasks.commands.init import init
+from tasks.commands._init import init
 from tasks.config import CONFIG_FILENAME, Config, read_config
 
 
