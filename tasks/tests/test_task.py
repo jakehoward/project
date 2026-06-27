@@ -33,6 +33,11 @@ class TestCreateTask:
         prefix = "This  is not  ok"
         assert task.metadata.created_by == prefix + (MAX_ATTR_VALUE_LENGTH - len(prefix)) * "x"
 
+    def test_create_task_removes_newlines_from_name(self):
+        task = actions.create_task(name="foo\nand\n\nbar\n\n")
+        assert task.filename == "foo_and_bar_.md"
+        assert task.name == "foo and bar"
+
 
 class TestPersistTask:
     def test_persist_task_writes_a_file(self, tmp_path: Path, monkeypatch):
@@ -75,3 +80,16 @@ class TestPersistTask:
         second_dashes_idx = file_lines[1:].index("---") + 1
         actual_body = "\n".join(file_lines[second_dashes_idx + 1 :])
         assert actual_body == task.body.rstrip("\n")
+
+    def test_persist_task_writes_a_single_line_name_to_header(self, tmp_path: Path, monkeypatch):
+        monkeypatch.chdir(tmp_path)
+        init_result = init(tasks_dir=Path("my/tasks"))
+        task = actions.create_task(name="Hello\nTask\nwith\n\nnewlines")
+        persist_task(task)
+        expected_header = [
+            "---",
+            "name: Hello Task with newlines",
+        ]
+        file_text = (init_result.tasks_dir / task.filename).read_text()
+        actual_header = "\n".join(file_text.splitlines()[0 : len(expected_header)])
+        assert actual_header == "\n".join(expected_header)
