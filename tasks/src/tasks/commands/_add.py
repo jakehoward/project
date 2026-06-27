@@ -1,3 +1,5 @@
+from pathlib import Path
+
 from tasks import actions
 from tasks.actions import create_task
 from tasks.config import assert_initialised, read_config
@@ -19,3 +21,10 @@ def add_task(name: str) -> None:
         raise ValueError(f"Task with filename {task.filename} already exists")
 
     actions.persist_task(task)
+    print(
+        f"Added task:\n"
+        f'    name:   "{task.name}"\n'
+        f'    file:   "{task_path.relative_to(Path.cwd())}"\n'
+        f'    status: "{task.metadata.status}"\n'
+        f'    author: "{task.metadata.created_by}"'
+    )
