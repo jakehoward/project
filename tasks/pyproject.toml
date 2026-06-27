@@ -1,9 +1,12 @@
 [project]
 name = "tasks"
 version = "0.1.0"
-description = "Add your description here"
+description = "A zero-dependency CLI for managing project tasks as markdown files"
 readme = "README.md"
 requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Jake Howard" }]
 dependencies = []
 
 [dependency-groups]
