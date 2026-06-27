@@ -2,8 +2,7 @@ from pathlib import Path
 
 import pytest
 
-from tasks.commands._add import add_task
-from tasks.commands._init import init
+from tasks.commands import add_task, init
 
 
 def test_add_task_raises_if_not_initialised(tmp_path: Path, monkeypatch) -> None:

@@ -15,7 +15,7 @@ def get_git_user() -> str:
     try:
         email = subprocess.check_output(["git", "config", "user.email"], text=True)  # noqa: S607
         name = subprocess.check_output(["git", "config", "user.name"], text=True)  # noqa: S607
-        return f"{name} <{email}>"
+        return f"{name.strip()} <{email.strip()}>"
     except (subprocess.CalledProcessError, FileNotFoundError):
         return "Unknown"
 

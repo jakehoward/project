@@ -17,7 +17,7 @@ def main() -> None:
             init_res = init(tasks_dir=Path(args.tasks_dir))
             print("Created tasks dir at:   ", init_res.tasks_dir, "(with .gitkeep)")
             print("Created tasks config at:", init_res.config_file)
-        if args.command == "add":
+        elif args.command == "add":
             add_task(name=args.name)
     except (FileExistsError, ValueError, RuntimeError, FileNotFoundError) as e:
         print("Error:", e)
