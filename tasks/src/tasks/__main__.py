@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from tasks.arg_parser import make_parser
-from tasks.commands.add import add
+from tasks.commands.add import add_task
 from tasks.commands.init import init
 
 
@@ -19,7 +19,7 @@ def main() -> None:
             print("Created tasks dir at:   ", init_res.tasks_dir, "(with .gitkeep)")
             print("Created tasks config at:", init_res.config_file)
         if args.command == "add":
-            add(name=args.name)
+            add_task(name=args.name)
     except (FileExistsError, ValueError, RuntimeError, FileNotFoundError) as e:
         print("Error:", e)
 
