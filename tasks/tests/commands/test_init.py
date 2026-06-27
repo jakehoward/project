@@ -61,3 +61,10 @@ def test_init_raises_if_config_already_exists(tmp_path: Path, monkeypatch) -> No
 
     with pytest.raises(FileExistsError, match='Config already exists. Tasks dir set to: "tasks"'):
         init(tasks_dir=(tmp_path / "some_other_dir"))
+
+
+def test_init_writes_a_gitkeep_file(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    init(tasks_dir=Path("./my-tasks/foo/tasks"))
+
+    assert (tmp_path / "my-tasks/foo/tasks/.gitkeep").is_file()

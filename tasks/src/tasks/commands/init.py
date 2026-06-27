@@ -20,3 +20,4 @@ def init(tasks_dir: Path) -> None:
 
     write_config(Config(tasks_dir=resolved_tasks_dir.relative_to(Path.cwd())))
     tasks_dir.mkdir(parents=True)
+    (tasks_dir / ".gitkeep").touch()
