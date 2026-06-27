@@ -13,6 +13,9 @@ def make_parser() -> argparse.ArgumentParser:
 
     _list_parser = subparsers.add_parser("list", help="list tasks")
 
+    serve_parser = subparsers.add_parser("serve", help="serve tasks on an http server")
+    serve_parser.add_argument("--port", default=8000, type=int)
+
     init_parser = subparsers.add_parser("init", help="initialise a new tasks project")
     init_parser.add_argument(
         "--tasks-dir",

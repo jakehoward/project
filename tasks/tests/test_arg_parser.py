@@ -17,6 +17,19 @@ def test_list_command():
     assert args.command == "list"
 
 
+def test_serve_command():
+    parser = make_parser()
+    args = parser.parse_args(["serve"])
+    assert args.command == "serve"
+
+
+def test_serve_command_with_port():
+    parser = make_parser()
+    args = parser.parse_args(["serve", "--port", "9865"])
+    assert args.command == "serve"
+    assert args.port == 9865
+
+
 def test_init_command_tasks_dir_flag():
     parser = make_parser()
     args = parser.parse_args(["init", "--tasks-dir", "the/tasks/dir"])
