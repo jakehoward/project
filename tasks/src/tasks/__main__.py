@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from tasks.arg_parser import make_parser
-from tasks.commands import add_task, init
+from tasks.commands import add_task, init, list_tasks
 
 
 def main() -> None:
@@ -19,6 +19,8 @@ def main() -> None:
             print("Created tasks config at:", init_res.config_file)
         elif args.command == "add":
             add_task(name=args.name)
+        elif args.command == "list":
+            list_tasks()
     except (FileExistsError, ValueError, RuntimeError, FileNotFoundError) as e:
         print("Error:", e)
 

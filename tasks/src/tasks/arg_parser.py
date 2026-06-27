@@ -11,6 +11,8 @@ def make_parser() -> argparse.ArgumentParser:
 
     subparsers = parser.add_subparsers(dest="command", title="commands")
 
+    _list_parser = subparsers.add_parser("list", help="list tasks")
+
     init_parser = subparsers.add_parser("init", help="initialise a new tasks project")
     init_parser.add_argument(
         "--tasks-dir",

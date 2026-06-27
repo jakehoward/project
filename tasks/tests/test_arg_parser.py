@@ -11,6 +11,12 @@ def test_init_command():
     assert args.command == "init"
 
 
+def test_list_command():
+    parser = make_parser()
+    args = parser.parse_args(["list"])
+    assert args.command == "list"
+
+
 def test_init_command_tasks_dir_flag():
     parser = make_parser()
     args = parser.parse_args(["init", "--tasks-dir", "the/tasks/dir"])
