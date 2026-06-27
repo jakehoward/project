@@ -68,3 +68,12 @@ def test_init_writes_a_gitkeep_file(tmp_path: Path, monkeypatch) -> None:
     init(tasks_dir=Path("./my-tasks/foo/tasks"))
 
     assert (tmp_path / "my-tasks/foo/tasks/.gitkeep").is_file()
+
+
+def test_init_returns_info_about_where_it_put_things(tmp_path: Path, monkeypatch) -> None:
+    monkeypatch.chdir(tmp_path)
+    rel_path = Path("./my-tasks/foo/tasks")
+    res = init(tasks_dir=rel_path)
+    assert res.tasks_dir == rel_path.resolve()
+    # slight DRY violation, but better a false negative (test fails)
+    assert res.config_file == tmp_path / CONFIG_FILENAME

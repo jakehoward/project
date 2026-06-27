@@ -37,6 +37,10 @@ def read_config() -> Config | None:
     return None
 
 
+def get_config_path() -> Path:
+    return Path.cwd() / CONFIG_FILENAME
+
+
 def write_config(config: Config) -> None:
     _assert_tasks_dir_path_is_valid(config.tasks_dir)
     with open(CONFIG_FILENAME, "w") as f:
