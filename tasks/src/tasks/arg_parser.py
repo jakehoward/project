@@ -10,18 +10,21 @@ def make_parser() -> argparse.ArgumentParser:
         description="A filesystem-based task tracker for small projects.",
         epilog="Run 'tasks <command> --help' for more info on a specific command.",
     )
-    parser.add_argument("--version", action="version", version=version("tasks"))
+    parser.add_argument("-v", "--version", action="version", version=version("tasks"))
 
     subparsers = parser.add_subparsers(dest="command", title="commands")
 
     _list_parser = subparsers.add_parser("list", help="list tasks")
 
     serve_parser = subparsers.add_parser("serve", help="serve tasks on an http server")
-    serve_parser.add_argument("--port", default=8000, type=int)
+    serve_parser.add_argument("-p", "--port", default=8000, type=int)
 
     move_parser = subparsers.add_parser("move", help="change a tasks status")
-    move_parser.add_argument("--task-file", type=Path, required=True, help="path to task file")
     move_parser.add_argument(
+        "-t", "--task-file", type=Path, required=True, help="path to task file"
+    )
+    move_parser.add_argument(
+        "-s",
         "--status",
         required=True,
         type=TaskStatus,
@@ -31,6 +34,7 @@ def make_parser() -> argparse.ArgumentParser:
 
     init_parser = subparsers.add_parser("init", help="initialise a new tasks project")
     init_parser.add_argument(
+        "-d",
         "--tasks-dir",
         required=False,
         default="tasks",
@@ -42,6 +46,8 @@ def make_parser() -> argparse.ArgumentParser:
     )
 
     add_parser = subparsers.add_parser("add", help="add a new task")
-    add_parser.add_argument("--name", required=True)
+    add_parser.add_argument(
+        "-n", "--name", required=True, help="name for the task, will be sanitised into a filename"
+    )
 
     return parser
