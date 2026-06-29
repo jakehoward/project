@@ -1,5 +1,8 @@
 import argparse
 from importlib.metadata import version
+from pathlib import Path
+
+from tasks.task import TaskStatus
 
 
 def make_parser() -> argparse.ArgumentParser:
@@ -15,6 +18,16 @@ def make_parser() -> argparse.ArgumentParser:
 
     serve_parser = subparsers.add_parser("serve", help="serve tasks on an http server")
     serve_parser.add_argument("--port", default=8000, type=int)
+
+    move_parser = subparsers.add_parser("move", help="change a tasks status")
+    move_parser.add_argument("--task-file", type=Path, required=True, help="path to task file")
+    move_parser.add_argument(
+        "--status",
+        required=True,
+        type=TaskStatus,
+        choices=[m.value for m in TaskStatus],
+        help="new status",
+    )
 
     init_parser = subparsers.add_parser("init", help="initialise a new tasks project")
     init_parser.add_argument(

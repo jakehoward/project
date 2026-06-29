@@ -1,7 +1,7 @@
 from pathlib import Path
 
 from tasks.arg_parser import make_parser
-from tasks.commands import add_task, init, list_tasks
+from tasks.commands import add_task, init, list_tasks, move_task
 from tasks.http_server import serve_http
 
 
@@ -24,6 +24,8 @@ def main() -> None:
             list_tasks()
         elif args.command == "serve":
             serve_http(port=args.port)
+        elif args.command == "move":
+            move_task(path_to_task=args.task_file, new_status=args.status)
     except (FileExistsError, ValueError, RuntimeError, FileNotFoundError) as e:
         print("Error:", e)
 
