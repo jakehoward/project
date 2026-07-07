@@ -15,7 +15,7 @@ Not in scope for this task:
 
 ## Acceptance criteria
 
-- [ ] `tasks serve -p {PORT}` starts an HTTP server listening on `http://127.0.0.1:PORT/`
+- [x] `tasks serve -p {PORT}` starts an HTTP server listening on `http://127.0.0.1:PORT/`
 - [ ] `/tasks` shows a kanban board of tasks
 - [ ] `/tasks/some-way-to-id-task` shows the file contents
 - [ ] `/tasks/some-way-to-id-task` has a back button to go back to the kanban board
@@ -24,7 +24,7 @@ Not in scope for this task:
 
 ## Eng tasks
 
-- [ ] Figure out how to test the HTTP server
+- [x] Figure out how to test the HTTP server (handler logic)
 - [ ] Create a Kanban board in HTML
 - [ ] Create a task view in HTML
 - [ ] Figure out how to id a task in a path-friendly way

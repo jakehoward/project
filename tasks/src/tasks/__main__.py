@@ -1,8 +1,7 @@
 from pathlib import Path
 
 from tasks.arg_parser import make_parser
-from tasks.commands import add_task, init, list_tasks, move_task
-from tasks.http_server import serve_http
+from tasks.commands import add_task, init, list_tasks, move_task, serve_http
 
 
 def main() -> None:
